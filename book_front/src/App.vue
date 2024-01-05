@@ -1,23 +1,17 @@
 <template>
   <v-app>
-    <v-main>
-      <HelloWorld/>
-    </v-main>
+    <NavBar></NavBar>
+    <MainBoard></MainBoard>
   </v-app>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import MainBoard from "@/components/common/MainBoard.vue";
+import NavBar from "@/components/common/NavBar.vue";
 
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-}
 </script>
+
+<style lang="scss" scoped>
+
+</style>
+

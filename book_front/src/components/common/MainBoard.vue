@@ -1,9 +1,9 @@
 <template>
   <v-main>
     <v-container>
-      <EmotionBoard></EmotionBoard>
-      <MainSearch></MainSearch>
-      <RouterView></RouterView>
+      <EmotionBoard />
+      <MainSearch />
+      <RouterView />
     </v-container>
   </v-main>
 </template>

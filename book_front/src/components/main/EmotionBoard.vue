@@ -15,13 +15,17 @@
       </div>
     </template>
   </vue-word-cloud>
+  <EmotionCard v-show="isModalShow" v-model:word="word" />
 </template>
 
 <script setup>
 import VueWordCloud from 'vuewordcloud';
 import axios from "axios";
 import { ref, onMounted } from 'vue';
-import router from "@/router";
+import EmotionCard from "@/components/main/EmotionCard.vue";
+
+const isModalShow = ref(false);
+const word = ref();
 
 // 1. 조회수와 감정이름 가져오기 15개 나열
 const randomColor = () => {
@@ -57,9 +61,11 @@ onMounted(() => {
 });
 
 // 단어 하나를 클릭하면 팝업이 뜬다
-const wordClick = (name) => {
-  console.log(name)
-  router.push({ name: 'EmotionCard' })
+const wordClick = (emotionWord) => {
+  word.value = emotionWord;
+  isModalShow.value = true;
+  // router.push({ name: 'EmotionCard', params: { word: String(word) }})
+
 }
 
 </script>

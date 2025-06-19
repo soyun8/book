@@ -15,7 +15,6 @@ public class BookController {
     private final BookService bookService;
     @GetMapping("/emotions")
     public List<Emotions> getEmotion() {
-        List<Emotions> emotionList = bookService.getEmotions();
-        return emotionList;
+        return bookService.getEmotions();
     }
 }

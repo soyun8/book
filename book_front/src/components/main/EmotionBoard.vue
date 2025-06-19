@@ -1,7 +1,7 @@
 <template>
   <h1 class="my-5 p-50 text-center">감정 구름</h1>
   <vue-word-cloud
-      style="height: 480px;width: 1135px;"
+      :style="{ height: height +'px', width: width + 'px' }"
       :words="words"
       :color="([, weight]) => randomColor()"
   >
@@ -21,69 +21,46 @@
 import VueWordCloud from 'vuewordcloud';
 import axios from "axios";
 import { ref, onMounted } from 'vue';
+import router from "@/router";
 
 // 1. 조회수와 감정이름 가져오기 15개 나열
 const randomColor = () => {
   return "#" + Math.round(Math.random() * 0xffffff).toString(16)
 }
 
+const width = ref(900);
+const height = ref(480);
+
+const updateSize = () => {
+  width.value = window.innerWidth * 0.9;
+  height.value = window.innerHeight * 0.6;
+};
+
+
 const words = ref([]);
 
 const getWords = async () => {
   const response = await axios.get('http://localhost:8080/emotions');
-  words.value = response.data.map(book => [book.emotion, book.hit]).slice(0, 20);
+  const data = response.data;
+
+  // 배열을 랜덤하게 섞는 함수 (Fisher-Yates 알고리즘)
+  const shuffled = data.sort(() => Math.random() - 0.5);
+
+  // 랜덤 20개 선택 후 words에 할당
+  words.value = shuffled.slice(0, 20).map(book => [book.emotion, book.hit]);
 };
 
-onMounted(getWords);
+onMounted(() => {
+  updateSize();  // 마운트 시 초기 크기 설정
+  window.addEventListener('resize', updateSize);
+  getWords();    // 워드클라우드 데이터 불러오기
+});
 
+// 단어 하나를 클릭하면 팝업이 뜬다
 const wordClick = (name) => {
   console.log(name)
+  router.push({ name: 'EmotionCard' })
 }
-
-/*let books = [
-  {
-    word: 'Frozen Yogurt',
-    weight: 15
-  },
-  {
-    word: 'Ice cream sandwich',
-    weight: 23
-  },
-  {
-    word: 'Eclair',
-    weight: 26
-  },
-  {
-    word: 'Cupcake',
-    weight: 30
-  },
-  {
-    word: 'Gingerbread',
-    weight: 35
-  },
-  {
-    word: 'Jelly bean',
-    weight: 37
-  },
-  {
-    word: 'Lollipop',
-    weight: 39
-  },
-  {
-    word: 'Honeycomb',
-    weight: 40
-  },
-  {
-    word: 'Donut',
-    weight: 45
-  },
-  {
-    word: 'KitKat',
-    weight: 51
-  },
-]*/
-
-
 
 </script>
 

@@ -19,8 +19,8 @@
 
 <script setup>
 import VueWordCloud from 'vuewordcloud';
-import axios from "axios";
 import { ref, onMounted } from 'vue';
+import { apiMethods } from "@/utils/api";
 
 const emit = defineEmits(['selectWord']);
 
@@ -45,8 +45,7 @@ const updateSize = () => {
 const words = ref([]);
 
 const getWords = async () => {
-  const response = await axios.get('http://localhost:8080/emotions');
-  const data = response.data;
+  const data = await apiMethods.emotionsAPI()
 
   // 배열을 랜덤하게 섞는 함수 (Fisher-Yates 알고리즘)
   const shuffled = data.sort(() => Math.random() - 0.5);

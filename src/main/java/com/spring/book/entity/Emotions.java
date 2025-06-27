@@ -1,4 +1,4 @@
-package com.spring.book.dto;
+package com.spring.book.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

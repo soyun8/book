@@ -1,5 +1,5 @@
 package com.spring.book.service;
-import com.spring.book.dto.Emotions;
+import com.spring.book.entity.Emotions;
 import com.spring.book.repository.EmotionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

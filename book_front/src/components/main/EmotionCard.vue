@@ -50,7 +50,8 @@
 </template>
 
 <script setup>
-import {defineProps, ref, watchEffect} from 'vue';
+import { defineProps, ref, watchEffect } from 'vue';
+import { apiMethods } from "@/utils/api";
 
 const messages = ref([]);
 
@@ -96,6 +97,13 @@ watchEffect(() => {
 
 // 카드 저장하기
 const cardSave = () => {
-  console.log()
+
+  const answer = {
+    word: props.word,
+    // data 부분만 뽑아내기
+    answers: messages.value.map(msg => msg.data)
+  }
+
+  apiMethods.cardSave(answer)
 }
 </script>

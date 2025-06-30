@@ -1,6 +1,6 @@
 package com.spring.book.service;
 
-import com.spring.book.dto.CardRequest;
+import com.spring.book.request.CardRequest;
 import com.spring.book.entity.Card;
 import com.spring.book.entity.Emotions;
 import com.spring.book.repository.CardRepository;

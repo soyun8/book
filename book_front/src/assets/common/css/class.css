@@ -26,3 +26,15 @@
     right: 20px;
     z-index: 10;
 }
+
+.loginForm {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -200%);
+    width: 600px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+}

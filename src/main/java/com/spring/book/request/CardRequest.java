@@ -1,4 +1,4 @@
-package com.spring.book.dto;
+package com.spring.book.request;
 
 import lombok.*;
 

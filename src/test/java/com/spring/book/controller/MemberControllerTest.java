@@ -1,7 +1,7 @@
 package com.spring.book.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.book.request.CardRequest;
+import com.spring.book.entity.Member;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,18 +12,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class BookControllerTest {
+class MemberControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -32,24 +29,18 @@ class BookControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    @DisplayName("감정단어 리스트 GET")
-    void getEmotion() throws Exception {
-        mockMvc.perform(get("/emotions"))
-                .andExpect(status().isOk())
-                .andDo(print());
-    }
+    @DisplayName("로그인 테스트")
+    void login() throws Exception {
 
-    @Test
-    @DisplayName("감정카드 저장하기")
-    void cardSave() throws Exception {
-        CardRequest cardRequest = CardRequest.builder()
-                .word("재미있는")
-                .answers(List.of("1", "2", "3"))
+        Member member = Member.builder()
+                .userEmail("test")
+                .password("123")
                 .build();
-        mockMvc.perform(post("/card/save")
+
+        mockMvc.perform(post("/member/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(cardRequest)))
-                .andExpect(status().isOk())
-                .andDo(print());
+                        .content(objectMapper.writeValueAsString(member)))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 }

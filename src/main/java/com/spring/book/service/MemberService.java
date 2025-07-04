@@ -19,9 +19,7 @@ public class MemberService {
     /*
     * 로그인 요청하기
     * */
-    public LoginResponse login(LoginRequest loginReq) {
-        Member member = memberRepository.findByUserEmail(loginReq.getUserEmail());
-        log.info("dd");
-        return null;
+    public Member login(LoginRequest loginReq) {
+        return memberRepository.findByUserEmail(loginReq.getUserEmail());
     }
 }

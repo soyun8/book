@@ -1,5 +1,11 @@
 <template>
   <h1 class="my-5 p-50 text-center">감정 구름</h1>
+  <v-btn
+      icon="mdi-cached"
+      size="large"
+      style="left: 550px"
+      @click="getWords()"
+  ></v-btn>
   <vue-word-cloud
       :style="{ height: height +'px', width: width + 'px' }"
       :words="words"

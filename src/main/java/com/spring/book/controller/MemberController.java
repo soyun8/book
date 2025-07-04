@@ -1,7 +1,7 @@
 package com.spring.book.controller;
 
+import com.spring.book.entity.Member;
 import com.spring.book.request.LoginRequest;
-import com.spring.book.response.LoginResponse;
 import com.spring.book.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +17,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest loginReq) {
+    public Member login(@RequestBody LoginRequest loginReq) {
         return memberService.login(loginReq);
     }
 }

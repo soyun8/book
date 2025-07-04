@@ -5,14 +5,14 @@
     </template>
 
     <v-app-bar-title>두둥실</v-app-bar-title>
+
+    <template v-slot:append>
+      <v-btn @click="$emit('login')">Login</v-btn>
+    </template>
+
   </v-app-bar>
 </template>
 
 <script setup>
 
-
 </script>
-
-<style lang="scss" scoped>
-
-</style>

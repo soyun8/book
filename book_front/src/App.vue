@@ -2,7 +2,7 @@
   <v-app>
     <v-card class="mx-auto">
       <v-layout>
-        <NavBar />
+        <NavBar @login="member.loginBtn()"/>
         <router-view />
       </v-layout>
     </v-card>
@@ -11,7 +11,9 @@
 
 <script setup>
 import NavBar from "@/components/common/NavBar.vue";
+import { memberStore } from "@/stores/member"
 
+const member = memberStore()
 </script>
 
 <style lang="scss" scoped>

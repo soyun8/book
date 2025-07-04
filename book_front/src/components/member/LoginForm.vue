@@ -1,44 +1,66 @@
 <template>
-  <v-sheet class="pa-12" rounded>
-    <v-card class="mx-auto px-6 py-8" max-width="60%" :elevation="12">
-      <v-form
-      >
+  <div class="loginForm">
+    <v-btn
+      class="close-btn"
+      density="comfortable"
+      icon="$close"
+      size="x-large"
+      variant="plain"
+      @click="$emit('close')"
+    ></v-btn>
+    <v-card :elevation="1" class="mx-auto px-6 py-8">
+      <v-form>
         <v-text-field
-            class="mb-2"
-            clearable
-            label="Email"
+          v-model="loginData.email"
+          class="mb-2"
+          clearable
+          label="Email"
         ></v-text-field>
 
         <v-text-field
-            clearable
-            label="Password"
-            placeholder="Enter your password"
+          v-model="loginData.pwd"
+          clearable
+          label="Password"
+          placeholder="Enter your password"
         ></v-text-field>
 
-        <br>
+        <br />
 
         <v-btn
-            block
-            color="success"
-            size="large"
-            type="submit"
-            variant="elevated"
+          block
+          color="success"
+          size="large"
+          type="submit"
+          variant="elevated"
         >
-          Sign In
+          회원가입
         </v-btn>
 
-        <br>
+        <br />
 
         <v-btn
-            block
-            color="primary"
-            size="large"
-            type="submit"
-            variant="elevated"
+          block
+          color="primary"
+          size="large"
+          type="submit"
+          variant="elevated"
+          @click="member.login(loginData)"
         >
-          Sign Up
+          로그인하기
         </v-btn>
       </v-form>
     </v-card>
-  </v-sheet>
+  </div>
 </template>
+
+<script setup>
+import { memberStore } from "@/stores/member";
+import { ref } from "vue";
+
+const loginData = ref({
+  email: "",
+  pwd: "",
+});
+
+const member = memberStore();
+</script>

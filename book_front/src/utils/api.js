@@ -14,5 +14,8 @@ export const apiMethods = {
     emotionsAPI: () => get('emotions'),
 
     // 카드 답변들 저장하기
-    cardSave: (answer) => post('card/save', answer)
+    cardSave: (answer) => post('card/save', answer),
+
+    // 로그인 하기
+    login: (loginData) => post('member/login', loginData),
 }

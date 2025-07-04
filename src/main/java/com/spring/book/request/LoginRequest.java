@@ -1,5 +1,6 @@
 package com.spring.book.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -11,9 +12,11 @@ import org.antlr.v4.runtime.misc.NotNull;
 public class LoginRequest {
 
     @NotNull
+    @JsonProperty("email")
     private String userEmail;
 
     @NotNull
+    @JsonProperty("pwd")
     private String password;
 
     @Builder

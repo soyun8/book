@@ -32,6 +32,7 @@
           size="large"
           type="submit"
           variant="elevated"
+          @click.once.prevent="$emit('signUpForm')"
         >
           회원가입
         </v-btn>
@@ -57,10 +58,12 @@
 import { memberStore } from "@/stores/member";
 import { ref } from "vue";
 
+const member = memberStore();
+
 const loginData = ref({
   email: "",
   pwd: "",
 });
 
-const member = memberStore();
+
 </script>

@@ -43,6 +43,9 @@ public class EmotionService {
                 .answer3(getAnswer(cardRequest.getAnswers(), 2))
                 .answer4(getAnswer(cardRequest.getAnswers(), 3))
                 .answer5(getAnswer(cardRequest.getAnswers(), 4))
+                .privateCard(Boolean.FALSE.equals(cardRequest.getPrivateCard()))
+                .userEmail(cardRequest.getUserEmail())
+                .nickName(cardRequest.getNickName())
                 .build();
     }
 

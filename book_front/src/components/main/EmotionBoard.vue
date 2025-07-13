@@ -10,6 +10,7 @@
       :style="{ height: height +'px', width: width + 'px' }"
       :words="words"
       :color="([, weight]) => randomColor()"
+      fontFamily="Quicksand"
   >
     <template v-slot="{ text : text, weight : weight }">
       <div
@@ -57,7 +58,7 @@ const getWords = async () => {
   const shuffled = data.sort(() => Math.random() - 0.5);
 
   // 랜덤 20개 선택 후 words에 할당
-  words.value = shuffled.slice(0, 30).map(book => [book.emotion, book.hit]);
+  words.value = shuffled.slice(0, 50).map(book => [book.emotion, book.hit]);
 };
 
 onMounted(() => {

@@ -8,11 +8,6 @@ const routes = [
         name: 'MainBoard',
         component: MainBoard,
     },
-    {
-        path: '/emotionCard',
-        name: 'EmotionCard',
-        component: () => import('../components/main/EmotionCard.vue'),
-    },
 ];
 
 const router = createRouter({

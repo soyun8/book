@@ -34,13 +34,25 @@ public class Card {
     @Column(name = "answer5")
     private String answer5;
 
+    @Column(name = "private")
+    private Boolean privateCard;
+
+    @Column(name = "user_email")
+    private String userEmail;
+
+    @Column(name = "nick_name")
+    private String nickName;
+
     @Builder
-    public Card(String word, String answer1, String answer2, String answer3, String answer4, String answer5) {
+    public Card(String word, String answer1, String answer2, String answer3, String answer4, String answer5, Boolean privateCard, String userEmail, String nickName) {
         this.word = word;
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.answer4 = answer4;
         this.answer5 = answer5;
+        this.privateCard = privateCard;
+        this.userEmail = userEmail;
+        this.nickName = nickName;
     }
 }

@@ -62,8 +62,8 @@
         variant="plain"
         @click="$emit('close')"
       ></v-btn>
-      <v-card class="mx-auto" max-width="400">
-        <v-card-text style="max-height: 70vh; overflow-y: auto">
+      <v-card class="mx-auto" max-width="400" style="overflow: hidden;">
+        <v-card-text id="emotionCard" style="max-height: 70vh; overflow-y: auto">
           <div
             class="font-weight-bold ms-1 mb-2"
             style="font-size: 30px; color: #263238"
@@ -132,6 +132,7 @@
 <script setup>
 import { defineProps, ref, watchEffect } from "vue";
 import { apiMethods } from "@/utils/api";
+import html2canvas from 'html2canvas';
 
 const messages = ref([]);
 const isWrite = ref(true); // 글쓰기 모드
@@ -188,17 +189,27 @@ const cardRead = () => {
 
 // 카드 캡쳐하기
 const cardCapture = () => {
-
+  let captureClass = document.getElementById('emotionCard');
+  // html2canvas 라이브러리 사용
+  html2canvas(captureClass).then(function(canvas) {
+    captureClass.style.height = captureClass.scrollHeight + 'px'
+    const imageUrl = canvas.toDataURL('image/png');
+    const downLink = document.createElement('a');
+    downLink.setAttribute('target', '_blank')
+    downLink.download = 'fileName' + '.png';
+    downLink.href = imageUrl;
+    downLink.click();
+  });
 };
 
-// 카드 공개하기 (웹에 게시하기)
+// 카드 공유하기 (웹에 게시하기)
 const cardPublic = async () => {
   privateCard.value = true;
   // TODO. 랜덤 닉네임 한번 해보기
   // 아이디 없이 저장하는 부분
   await saveApi().then(() => {
-    isPublic.value = false;
-  })
+    isPublic.value = false; // 공유가 감사하다는 문구 show
+   })
 };
 
 // 카드 저장하기

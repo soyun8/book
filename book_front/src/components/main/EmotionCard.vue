@@ -62,8 +62,11 @@
         variant="plain"
         @click="$emit('close')"
       ></v-btn>
-      <v-card class="mx-auto" max-width="400" style="overflow: hidden;">
-        <v-card-text id="emotionCard" style="max-height: 70vh; overflow-y: auto">
+      <v-card class="mx-auto" max-width="400" style="overflow: hidden">
+        <v-card-text
+          id="emotionCard"
+          style="max-height: 70vh; overflow-y: auto"
+        >
           <div
             class="font-weight-bold ms-1 mb-2"
             style="font-size: 30px; color: #263238"
@@ -88,17 +91,22 @@
         </v-card-text>
       </v-card>
       <v-card-actions v-show="isPublic">
-          <v-text-field
-            label="닉네임"
-            variant="solo"
-            v-model="nickName"
-          ></v-text-field>&nbsp;&nbsp;&nbsp;&nbsp;
+        <v-text-field
+          label="닉네임"
+          variant="solo"
+          v-model="nickName"
+        ></v-text-field
+        >&nbsp;&nbsp;&nbsp;&nbsp;
         <v-btn variant="tonal" color="pink" @click="cardPublic">
           익명으로 공유하기
         </v-btn>
       </v-card-actions>
       <v-card-actions v-show="isPublic === false">
-        <v-alert text="카드를 공유해주셔서 감사합니다!" variant="outlined" type="success"></v-alert>
+        <v-alert
+          text="카드를 공유해주셔서 감사합니다!"
+          variant="outlined"
+          type="success"
+        ></v-alert>
       </v-card-actions>
       <v-card-actions>
         <v-btn
@@ -132,7 +140,7 @@
 <script setup>
 import { defineProps, ref, watchEffect } from "vue";
 import { apiMethods } from "@/utils/api";
-import html2canvas from 'html2canvas';
+import html2canvas from "html2canvas";
 
 const messages = ref([]);
 const isWrite = ref(true); // 글쓰기 모드
@@ -152,25 +160,25 @@ watchEffect(() => {
     {
       key: 1,
       question: `무슨 상황에서 그 ${props.word}을(를) 느꼈어?`,
-      color: "indigo-darken-1",
+      color: "pink-darken-1",
       data: "",
     },
     {
       key: 2,
       question: `왜 '${props.word}' 이란 단어가 너의 마음 속에서 걸렸어?`,
-      color: "indigo-darken-2",
+      color: "pink-darken-2",
       data: "",
     },
     {
       key: 3,
       question: `그랬구나, 그러면 너는 그 부분을 어떻게 고치고 싶어?`,
-      color: "indigo-darken-3",
+      color: "pink-darken-3",
       data: "",
     },
     {
       key: 4,
       question: `그렇게 고치려면 너는 어떻게 해야할까? (상대에게 어떻게 말해야 너의 생각을 받아들일까?)`,
-      color: "indigo-darken-4",
+      color: "pink-darken-4",
       data: "",
     },
     {
@@ -183,33 +191,50 @@ watchEffect(() => {
 });
 
 // 카드 읽어주기 모드
-const cardRead = () => {
+const cardRead = async () => {
+  const data = {
+    lang: 'ko'
+  }
+  await apiMethods.getRandomNickname(data).then((res) => {
+    nickName.value = res.data
+  })
   isWrite.value = false;
 };
 
 // 카드 캡쳐하기
 const cardCapture = () => {
-  let captureClass = document.getElementById('emotionCard');
+  let element = document.getElementById("emotionCard");
   // html2canvas 라이브러리 사용
-  html2canvas(captureClass).then(function(canvas) {
-    captureClass.style.height = captureClass.scrollHeight + 'px'
-    const imageUrl = canvas.toDataURL('image/png');
-    const downLink = document.createElement('a');
-    downLink.setAttribute('target', '_blank')
-    downLink.download = 'fileName' + '.png';
-    downLink.href = imageUrl;
-    downLink.click();
+  html2canvas(element).then(function (canvas) {
+    screenCapture(canvas, element);
   });
+};
+
+const screenCapture = (canvas, element) => {
+  // scroll 때문에 높이 수동으로 맞춤
+  element.style.height = element.scrollHeight + "px";
+
+  // 파일 이름은 날짜+시간
+  const fileName = new Date()
+    .toLocaleString("sv")
+    .replace(/:/g, "-")
+    .replace(" ", "_");
+
+  const imageUrl = canvas.toDataURL("image/png");
+  const downLink = document.createElement("a");
+  downLink.setAttribute("target", "_blank");
+  downLink.download = fileName + ".png";
+  downLink.href = imageUrl;
+  downLink.click();
 };
 
 // 카드 공유하기 (웹에 게시하기)
 const cardPublic = async () => {
   privateCard.value = true;
-  // TODO. 랜덤 닉네임 한번 해보기
   // 아이디 없이 저장하는 부분
   await saveApi().then(() => {
     isPublic.value = false; // 공유가 감사하다는 문구 show
-   })
+  });
 };
 
 // 카드 저장하기
@@ -219,8 +244,8 @@ const cardSave = async () => {
   // 비 로그인시 닉네임 이용해 공개 여부만 체크
   await saveApi().then(() => {
     // 저장하기 버튼 disable
-    isSaveReadOnly.value = true
-  })
+    isSaveReadOnly.value = true;
+  });
 };
 
 const saveApi = async () => {
@@ -230,6 +255,6 @@ const saveApi = async () => {
     privateCard: privateCard.value,
     nickName: nickName.value,
   };
-  await apiMethods.cardSave(answer)
-}
+  await apiMethods.cardSave(answer);
+};
 </script>

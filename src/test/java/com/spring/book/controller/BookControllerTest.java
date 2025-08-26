@@ -39,6 +39,15 @@ class BookControllerTest {
                 .andDo(print());
     }
 
+//    @Test
+//    @DisplayName("감정단어 리스트 조회 실패")
+//    void getEmotionError() throws Exception {
+//        mockMvc.perform(get("/emotions"))
+//                .andExpect(status().is5xxServerError())
+//                .andDo(print());
+//    }
+
+
     @Test
     @DisplayName("감정카드 저장하기")
     void cardSave() throws Exception {

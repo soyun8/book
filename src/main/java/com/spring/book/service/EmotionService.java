@@ -1,13 +1,17 @@
 package com.spring.book.service;
 
+import com.spring.book.exception.BusinessException;
+import com.spring.book.exception.ErrorCode;
 import com.spring.book.request.CardRequest;
 import com.spring.book.entity.Card;
 import com.spring.book.entity.Emotions;
 import com.spring.book.repository.CardRepository;
 import com.spring.book.repository.EmotionRepository;
+import com.spring.book.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.ErrorResponseException;
 
 import java.util.List;
 
@@ -21,10 +25,17 @@ public class EmotionService {
     @Autowired
     private CardRepository cardRepository;
 
-
-
+    /**
+     * 감정단어 GET
+     * @return 감정단어 List
+     */
     public List<Emotions> getEmotions() {
-        return emotionRepository.findAll();
+        List<Emotions> result = emotionRepository.findAll();
+        if (result.isEmpty()) {
+            throw new BusinessException(ErrorCode.NO_CONTENT);
+        }
+        return result;
+
     }
 
 

@@ -18,4 +18,7 @@ export const apiMethods = {
 
     // 로그인 하기
     login: (loginData) => post('member/login', loginData),
+
+    // 랜덤 닉네임 get, 외부 API
+    getRandomNickname : (data) => post('https://www.rivestsoft.com/nickname/getRandomNickname.ajax', data)
 }

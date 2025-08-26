@@ -42,21 +42,27 @@
 
 ---
 
-- 감정단어 서치해서 DB에 넣기
-- 둥둥 뜨는 감정구름 생성하기 (vuewordcloud 라이브러리 사용)
-- 단어 선택하면 감정카드 팝업 띄우기
-- 카드 저장하기
-- 회원가입, 로그인 이런거 만들어서 회원별로 카드 저장할 수 있게 하기
+- [x] 감정단어 서치해서 DB에 넣기
+- [x] 둥둥 뜨는 감정구름 생성하기 (vuewordcloud 라이브러리 사용)
+- [x] 단어 선택하면 감정카드 팝업 띄우기
+- [x] 카드 저장하기
+- [ ] 회원가입, 로그인 이런거 만들어서 회원별로 카드 저장할 수 있게 하기
   JWT, 시큐리티 등등 사용해서 생성하기
 
-- 카드 저장 전에 공개/비공개 체크 하게 하기
-- 저장하기 누르면 스크린샷 저장 할 수 있게 하고
-- 회원일 경우 카드를 따로 저장할 수 있음
+- [x] 카드 저장 전에 공개/비공개 체크 하게 하기
+- [x] 저장하기 누르면 스크린샷 저장 할 수 있게 하고
+- [ ] 회원일 경우 카드를 따로 저장할 수 있음
+- [ ] WebPack 말고 Vite 사용해서 배포 다시 하기
+- [ ] 예외처리 다시 하기
 
 ---
 
-### 감정 카드 공유하기 (스크린 캡쳐)
+### 사용한 외부 API
 
-- html2canvas 라이브러리 사용 [공식사이트](https://html2canvas.hertzen.com/getting-started)
-
+- 둥둥 뜨는 글자 [Vuewordcloud](https://github.com/SeregPie/VueWordCloud)
+- 스크린 샷 [html2canvas](https://html2canvas.hertzen.com/getting-started)
+- [랜덤 닉네임 부여](https://www.rivestsoft.com/nickname.html)
 - 
+
+---
+
